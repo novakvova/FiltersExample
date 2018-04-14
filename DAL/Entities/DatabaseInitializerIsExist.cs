@@ -2,16 +2,24 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class DatabaseInitializerIsExist : DropCreateDatabaseAlways<EFContext> //CreateDatabaseIfNotExists<EFContext>
+    public class DatabaseInitializerIsExist : CreateDatabaseIfNotExists<EFContext>//DropCreateDatabaseAlways<EFContext>
     {
         protected override void Seed(EFContext context)
         {
+            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+            UriBuilder uri = new UriBuilder(codeBase);
+            string path = Uri.UnescapeDataString(uri.Path);
+
+            string baseDir = Path.GetDirectoryName(path) + "\\Migrations\\ViewFilters\\vFilterNameGroups.sql";
+            context.Database.ExecuteSqlCommand(File.ReadAllText(baseDir));
             #region InitCategory
             context.Categories.AddOrUpdate(
                 h => h.Id,

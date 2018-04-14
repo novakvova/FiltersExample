@@ -65,7 +65,12 @@
     <Compile Include="Migrations\201804140723024_Cateate table for Filters.Designer.cs">
       <DependentUpon>201804140723024_Cateate table for Filters.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804140930464_Create view FilterGroups.cs" />
+    <Compile Include="Migrations\201804140930464_Create view FilterGroups.Designer.cs">
+      <DependentUpon>201804140930464_Create view FilterGroups.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Views\Filters\VFilterNameGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +84,14 @@
     <EmbeddedResource Include="Migrations\201804140723024_Cateate table for Filters.resx">
       <DependentUpon>201804140723024_Cateate table for Filters.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804140930464_Create view FilterGroups.resx">
+      <DependentUpon>201804140930464_Create view FilterGroups.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Migrations\ViewFilters\vFilterNameGroups.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

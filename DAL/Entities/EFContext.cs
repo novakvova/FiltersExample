@@ -1,3 +1,4 @@
+using DAL.Migrations.Views.Filters;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace DAL.Entities
         public DbSet<Product> Products { get; set; }
         public DbSet<Filter> Filters { get; set; }
         public DbSet<FilterNameGroup> FilterNameGroups { get; set; }
+        public DbSet<VFilterNameGroup> VFilterNameGroups { get; set; }
 
 
     }
