@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{28DD214E-A076-4450-8AAB-4FEF96B6F13B}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{386599A9-A448-46EC-8DB6-8316844FE1CE}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DAL</RootNamespace>
-    <AssemblyName>DAL</AssemblyName>
+    <RootNamespace>ConsoleTestFilter</RootNamespace>
+    <AssemblyName>ConsoleTestFilter</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -29,18 +29,19 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,23 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Category.cs" />
-    <Compile Include="Entities\DatabaseInitializerIsExist.cs" />
-    <Compile Include="Entities\EFContext.cs" />
-    <Compile Include="Entities\Filter.cs" />
-    <Compile Include="Entities\FilterNameGroup.cs" />
-    <Compile Include="Entities\FilterValue.cs" />
-    <Compile Include="Entities\FilterName.cs" />
-    <Compile Include="Entities\Product.cs" />
-    <Compile Include="Migrations\201804140647349_Cateate table tblCategories.cs" />
-    <Compile Include="Migrations\201804140647349_Cateate table tblCategories.Designer.cs">
-      <DependentUpon>201804140647349_Cateate table tblCategories.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804140723024_Cateate table for Filters.cs" />
-    <Compile Include="Migrations\201804140723024_Cateate table for Filters.Designer.cs">
-      <DependentUpon>201804140723024_Cateate table for Filters.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,12 +58,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804140647349_Cateate table tblCategories.resx">
-      <DependentUpon>201804140647349_Cateate table tblCategories.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804140723024_Cateate table for Filters.resx">
-      <DependentUpon>201804140723024_Cateate table for Filters.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{28dd214e-a076-4450-8aab-4fef96b6f13b}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

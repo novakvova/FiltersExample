@@ -10,6 +10,9 @@ namespace DAL.Entities
         public EFContext()
             : base("name=ShopSemenConnection")
         {
+            Database.SetInitializer<EFContext>(
+                new DatabaseInitializerIsExist()
+                );
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<FilterName> FilterNames { get; set; }

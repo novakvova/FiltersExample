@@ -15,16 +15,16 @@ namespace DAL.Migrations
 
         protected override void Seed(DAL.Entities.EFContext context)
         {
-            #region InitCategory
-            context.Categories.AddOrUpdate(
-                h => h.Id,
-                new Category
-                {
-                    Id = 1,
-                    Name = "Îäÿã",
-                    ParentId = null
-                });
-            #endregion
+            //#region InitCategory
+            //context.Categories.AddOrUpdate(
+            //    h => h.Id,
+            //    new Category
+            //    {
+            //        Id = 1,
+            //        Name = "Îäÿã",
+            //        ParentId = null
+            //    });
+            //#endregion
         }
     }
 }
