@@ -18,5 +18,6 @@ namespace DAL.Entities
         [Required, StringLength(maximumLength:255)]
         public string Name { get; set; }
         public ICollection<Category> Parent { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

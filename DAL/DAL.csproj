@@ -51,12 +51,33 @@
   <ItemGroup>
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\EFContext.cs" />
+    <Compile Include="Entities\Filter.cs" />
+    <Compile Include="Entities\FilterNameGroup.cs" />
+    <Compile Include="Entities\FilterValue.cs" />
+    <Compile Include="Entities\FilterName.cs" />
+    <Compile Include="Entities\Product.cs" />
+    <Compile Include="Migrations\201804140647349_Cateate table tblCategories.cs" />
+    <Compile Include="Migrations\201804140647349_Cateate table tblCategories.Designer.cs">
+      <DependentUpon>201804140647349_Cateate table tblCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804140723024_Cateate table for Filters.cs" />
+    <Compile Include="Migrations\201804140723024_Cateate table for Filters.Designer.cs">
+      <DependentUpon>201804140723024_Cateate table for Filters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804140647349_Cateate table tblCategories.resx">
+      <DependentUpon>201804140647349_Cateate table tblCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804140723024_Cateate table for Filters.resx">
+      <DependentUpon>201804140723024_Cateate table for Filters.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
