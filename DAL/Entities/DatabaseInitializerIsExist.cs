@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class DatabaseInitializerIsExist : CreateDatabaseIfNotExists<EFContext>
+    public class DatabaseInitializerIsExist : DropCreateDatabaseAlways<EFContext> //CreateDatabaseIfNotExists<EFContext>
     {
         protected override void Seed(EFContext context)
         {
@@ -22,6 +22,7 @@ namespace DAL.Entities
                     ParentId = null
                 });
             #endregion
+
             #region InitFilteName
             context.FilterNames.AddOrUpdate(
                 h => h.Id,
@@ -36,6 +37,214 @@ namespace DAL.Entities
                 {
                     Id = 2,
                     Name = "Розмір"
+                });
+            #endregion
+
+            #region InitFilteValue
+            context.FilterValues.AddOrUpdate(
+                h => h.Id,
+                new FilterValue
+                {
+                    Id = 1,
+                    Name = "L"
+                });
+            context.FilterValues.AddOrUpdate(
+                h => h.Id,
+                new FilterValue
+                {
+                    Id = 2,
+                    Name = "M"
+                });
+            context.FilterValues.AddOrUpdate(
+                h => h.Id,
+                new FilterValue
+                {
+                    Id = 3,
+                    Name = "XL"
+                });
+            context.FilterValues.AddOrUpdate(
+                h => h.Id,
+                new FilterValue
+                {
+                    Id = 4,
+                    Name = "XX"
+                });
+            context.FilterValues.AddOrUpdate(
+                h => h.Id,
+                new FilterValue
+                {
+                    Id = 5,
+                    Name = "Чорний"
+                });
+            context.FilterValues.AddOrUpdate(
+                h => h.Id,
+                new FilterValue
+                {
+                    Id = 6,
+                    Name = "Білий"
+                });
+            context.FilterValues.AddOrUpdate(
+                h => h.Id,
+                new FilterValue
+                {
+                    Id = 7,
+                    Name = "Зелений"
+                });
+            context.FilterValues.AddOrUpdate(
+                h => h.Id,
+                new FilterValue
+                {
+                    Id = 8,
+                    Name = "Жовтий"
+                });
+            #endregion
+
+            #region InitProduct
+            context.Products.AddOrUpdate(
+                h => h.Id,
+                new Product
+                {
+                    Id = 1,
+                    CategoryId = 1,
+                    Name = "Джинси",
+                    Price = 800,
+                    Quantity = 5,
+                    DateCreate = DateTime.Now
+                });
+            context.Products.AddOrUpdate(
+                h => h.Id,
+                new Product
+                {
+                    Id = 2,
+                    CategoryId = 1,
+                    Name = "Брюкі",
+                    Price = 140,
+                    Quantity = 2,
+                    DateCreate = DateTime.Now
+                });
+            context.Products.AddOrUpdate(
+                h => h.Id,
+                new Product
+                {
+                    Id = 3,
+                    CategoryId = 1,
+                    Name = "Труси",
+                    Price = 1040,
+                    Quantity = 30,
+                    DateCreate = DateTime.Now
+                });
+            context.Products.AddOrUpdate(
+                h => h.Id,
+                new Product
+                {
+                    Id = 4,
+                    CategoryId = 1,
+                    Name = "Майкі",
+                    Price = 40,
+                    Quantity = 20,
+                    DateCreate = DateTime.Now
+                });
+            #endregion
+
+            #region InitFilterNameGroup
+            context.FilterNameGroups.AddOrUpdate(
+                h => new { h.FilterNameId, h.FilterValueId },
+                new FilterNameGroup
+                {
+                    FilterNameId = 1,
+                    FilterValueId = 5
+                });
+            context.FilterNameGroups.AddOrUpdate(
+                h => new { h.FilterNameId, h.FilterValueId },
+                new FilterNameGroup
+                {
+                    FilterNameId = 1,
+                    FilterValueId = 6
+                });
+            context.FilterNameGroups.AddOrUpdate(
+                h => new { h.FilterNameId, h.FilterValueId },
+                new FilterNameGroup
+                {
+                    FilterNameId = 1,
+                    FilterValueId = 7
+                });
+            context.FilterNameGroups.AddOrUpdate(
+                h => new { h.FilterNameId, h.FilterValueId },
+                new FilterNameGroup
+                {
+                    FilterNameId = 1,
+                    FilterValueId = 8
+                });
+            context.FilterNameGroups.AddOrUpdate(
+                h => new { h.FilterNameId, h.FilterValueId },
+                new FilterNameGroup
+                {
+                    FilterNameId = 2,
+                    FilterValueId = 1
+                });
+            context.FilterNameGroups.AddOrUpdate(
+                h => new { h.FilterNameId, h.FilterValueId },
+                new FilterNameGroup
+                {
+                    FilterNameId = 2,
+                    FilterValueId = 2
+                });
+            context.FilterNameGroups.AddOrUpdate(
+                h => new { h.FilterNameId, h.FilterValueId },
+                new FilterNameGroup
+                {
+                    FilterNameId = 2,
+                    FilterValueId = 3
+                });
+            context.FilterNameGroups.AddOrUpdate(
+                h => new { h.FilterNameId, h.FilterValueId },
+                new FilterNameGroup
+                {
+                    FilterNameId = 2,
+                    FilterValueId = 4
+                });
+            #endregion
+
+            #region InitFilters
+            context.Filters.AddOrUpdate(
+                h => new { h.FilterNameId, h.FilterValueId, h.ProductId },
+                new Filter
+                {
+                    FilterNameId = 1,
+                    FilterValueId = 6,
+                    ProductId = 4
+                });
+            context.Filters.AddOrUpdate(
+                h => new { h.FilterNameId, h.FilterValueId, h.ProductId },
+                new Filter
+                {
+                    FilterNameId = 1,
+                    FilterValueId = 7,
+                    ProductId = 4
+                });
+            context.Filters.AddOrUpdate(
+                h => new { h.FilterNameId, h.FilterValueId, h.ProductId },
+                new Filter
+                {
+                    FilterNameId = 2,
+                    FilterValueId = 2,
+                    ProductId = 4
+                });
+            context.Filters.AddOrUpdate(
+                h => new { h.FilterNameId, h.FilterValueId, h.ProductId },
+                new Filter
+                {
+                    FilterNameId = 1,
+                    FilterValueId = 6,
+                    ProductId = 2
+                });
+            context.Filters.AddOrUpdate(
+                h => new { h.FilterNameId, h.FilterValueId, h.ProductId },
+                new Filter
+                {
+                    FilterNameId = 1,
+                    FilterValueId = 7,
+                    ProductId = 1
                 });
             #endregion
             base.Seed(context);
