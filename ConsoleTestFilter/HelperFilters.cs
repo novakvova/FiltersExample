@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace ConsoleTestFilter
 {
-    class FTreeViewItem
+    class FValueViewItem
     {
         public int ? Id { get; set; } //Костиль
         public string Name { get; set; }
     }
-    class FNodeTreeView : FTreeViewItem
+    class FNameViewModel
     {
-        public List<FTreeViewItem> Childrens { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public List<FValueViewItem> Childrens { get; set; }
     }
 }

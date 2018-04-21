@@ -18,18 +18,52 @@ namespace ConsoleTestFilter
                 //TestWorkInitDatabasePrint(context);
 
                 var listFilters = GetFilters(context);
-                foreach(var fName in listFilters)
+                foreach (var fName in listFilters)
                 {
-                    Console.WriteLine("{0} - {1}",fName.Id,fName.Name);
-                    foreach(var fValue in fName.Childrens)
+                    Console.WriteLine("{0} - {1}", fName.Id, fName.Name);
+                    foreach (var fValue in fName.Childrens)
                     {
                         Console.WriteLine("\t{0} - {1}", fValue.Id, fValue.Name);
                     }
                 }
 
                 //Масив фільтрів, які потрібно примінити до продуктів
-                int[] filterValueList = { 6, 7, 2 };
-
+                int[] fValsSearch = { 6, 7, 2 };
+                var query = context
+                    .Products
+                    //.Include()
+                    .AsQueryable();
+                foreach (var fName in listFilters)
+                {
+                    int count = 0; //Кількість співпадніть у групі фільтрів
+                    var predicate = PredicateBuilder.False<Product>();
+                    foreach(var fVale in fName.Childrens)
+                    {
+                        for (int i = 0; i < fValsSearch.Count(); i++)
+                        {
+                            var idV = fVale.Id;
+                            if(fValsSearch[i]==idV)
+                            {
+                                predicate = predicate
+                                    .Or(p => p.Filters
+                                    .Any(f => f.FilterValueId == idV));
+                                count++;
+                            }
+                        }
+                    }
+                    if (count != 0)
+                        query = query.Where(predicate);
+                }
+                var resultSearch = query.Select(p => new
+                {
+                    Id=p.Id,
+                    Name=p.Name,
+                    Price=p.Price
+                });
+                foreach(var p in resultSearch)
+                {
+                    Console.WriteLine($"{p.Id} - {p.Name} - {p.Price}");
+                }
 
             }
         }
@@ -48,7 +82,7 @@ namespace ConsoleTestFilter
             Console.WriteLine("Кількість фільрів по продуктах {0}",
                 context.Filters.Count());
         }
-        static List<FNodeTreeView> GetFilters(EFContext context)
+        static List<FNameViewModel> GetFilters(EFContext context)
         {
             var query = from f in context.VFilterNameGroups.AsQueryable()
                         where f.FilterValueId != null
@@ -68,29 +102,21 @@ namespace ConsoleTestFilter
                              orderby g.Key.Name
 
                              select g;
-            List<FNodeTreeView> listFilters = new List<FNodeTreeView>();
+            List<FNameViewModel> listFilters = new List<FNameViewModel>();
             foreach (var filterName in groupNames)
             {
-                FNodeTreeView node = new FNodeTreeView
+                FNameViewModel node = new FNameViewModel
                 {
                     Id = filterName.Key.Id,
-                    Name = filterName.Key.Name,
-                    Childrens = new List<FTreeViewItem>()
+                    Name = filterName.Key.Name
                 };
-                var fValues = from v in filterName
-                              group v by new FTreeViewItem
-                              {
-                                  Id = v.FValueId,
-                                  Name = v.FValue
-                              } into g
-                              select g.Key;
-
-                foreach (var item in fValues)
-                {
-                    //if (string.IsNullOrEmpty(item.Name))
-                    //    continue;
-                    node.Childrens.Add(item);
-                }
+                node.Childrens = (from v in filterName
+                                  group v by new FValueViewItem
+                                  {
+                                      Id = v.FValueId,
+                                      Name = v.FValue
+                                  } into g
+                                  select g.Key).ToList();
                 listFilters.Add(node);
             }
             return listFilters;
